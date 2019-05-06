@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>What's up with Mars</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet"> 
+  <style>
+      html,body{
+        background-color:#e9ecef;
+      }
+
+      .container{
+        background-color:#fff;
+        padding-top:1rem;
+        margin-bottom:1rem;
+      }
+      .jumbotron{
+        background:url('/static/images/mission_to_mars.jpg') 0 0 no-repeat;
+        background-size:cover;
+      }     
+
+      .jumbotron h1{
+        font-family: 'Gugi', cursive;
+        color:#ffd8c6;
+        text-shadow: 2px 2px 8px rgba(0,0,0,.5);
+      }
+      h2{
+        padding-top: .5rem;
+        padding-bottom: .3rem;
+        border-bottom:rgba(0,0,0,.125) 1px solid;
+      }
+      h3{
+        font-size: 1.3rem;
+      }
+
+      .card{
+        margin-bottom:1.5rem;
+      }
+
+      table.dataframe{
+        font-size:.9rem;
+        width:100%;
+        margin-bottom:1.5rem;
+      }
+      table.dataframe td, table.dataframe th{
+        padding:6px;
+      }
+      
+      .btn-primary, .btn-primary:hover,
+      .btn-primary:not(:disabled):not(.disabled).active, 
+      .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+        background:rgba(0,0,0,.5);
+        border:1px dashed red;
+        font-variant: small-caps;
+        font-size:1rem;
+      }
+      .btn-primary:hover, .btn-primary:active{
+        color:red;
+      }
+
+      .mbottom{
+        margin-bottom:1.5rem;
+      }
+
+  </style>
+</head>
+
+<body>
+  
+    <div class="jumbotron text-center jumbotron-fluid">
+      <h1>MISSION TO MARS</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button" >GET THE LATEST</a></p>
+    </div>
+    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h2>Latest Mars News</h2>
+          <h3>{{ marsinfo.news.title }}</h3>
+          <p>{{ marsinfo.news.blurb }}</p>
+        </div>
+      </div>
+
+      <div class='row'>
+          <div class='col-md-8'>
+            <h2>Featured Mars Image</h2>
+          </div>
+      </div>
+
+      <div class='row'>
+          <div class='col-md-8'>
+            <img src="{{ marsinfo.fimage }}" class="img-fluid mbottom" alt="Featured Mars Image">
+          </div>
+
+          <div class='col-md-4'>
+              <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Current Weather on Mars</h5>
+                    <p>{{marsinfo.weather}}</p>
+                  </div>
+              </div>
+
+              <h3>Mars Facts</h3>
+              {{ marsinfo.facts|safe }}
+          </div>
+          
+      </div>
+
+      <div class='row'>
+         <div class='col-md-12 text-center'>
+            <h2>Mars Hemispheres</h2>
+         </div>
+      </div>
+
+      <div class='row'>
+          {% for item in marsinfo.hemispheres %}
+            <div class='col-md-6'>
+                <div class="card" style="width: 100%;">
+                    <img src="{{item.img_url}}" class="card-img-top" alt="{{item.title}}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{item.title}}</h5>
+                    </div>
+                  </div>
+            </div>
+          {% endfor %}
+      </div>
+    </div><!--end .container-->
+  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
